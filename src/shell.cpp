@@ -1,17 +1,17 @@
 #include "./headers/shell.h"
 
-Shell::Shell(const std::map<std::string, ShellCommand>& newCommands, std::ostream& out, std::istream& in):
+Shell::Shell(const std::map<std::string, ShellCommand* >& newCommands, std::ostream& out, std::istream& in):
 commands(newCommands),in(in),out(out){}
 
 void Shell::start() {
   std::string commandWithArgs;
-  while(std::getline(in, commandWithArgs)) {
-    ShellCommand cmd = commands[getCommandName(commandWithArgs)];
-    if (cmd.getName() == std::string("")) {
+  while(std::getline(in, commandWithArgs, '\n')) {
+    ShellCommand* cmd = commands[getCommandName(commandWithArgs)];
+    if (cmd == NULL) {
       out << "command not found";
     } else {
-      cmd.run(commandWithArgs);
-      if (cmd.getName() == "quit") {
+      cmd->run(commandWithArgs);
+      if (cmd->getName() == "quit") {
         break;
       }
     }
