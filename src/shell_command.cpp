@@ -4,29 +4,41 @@
 
   void ShellCommand::checkNumberOfArguments(int real, int expected, std::ostream& out) {
     if (real < expected) {
-      out << "too few arguments";
+      out << "too few arguments: expected "<< expected << std::endl;
     } else if (real > expected){
-        out << "too many arguments";
+        out << "too many arguments: expected " << expected << std::endl;
     }
   }
-  void ShellCommand::run(std::string arguments) {
-   std::cout << "base!";
+  void ShellCommand::checkNumberOfArguments(int real, int expected1, int expected2, std::ostream &out) {
+    if (real < expected1 && real < expected2) {
+      out << "too few arguments: expected "<< expected1 << " or " << expected2 << std::endl;
+    } else if (real > expected1 && real > expected2) {
+        out << "too many arguments: expected " << expected1 << " or " << expected2 << std::endl;
+    } else if ((real > expected1 && real < expected2) || (real > expected2 && real < expected1)) {
+       out << "incorrect number of arguments: expected " << expected1 << " or " << expected2 << std::endl;
+    }
+
   }
+  void ShellCommand::run(std::string arguments) {}
 
   std::vector<std::string> ShellCommand::parseArguments(std::string notParsedArguments) {
     std::vector<std::string> parsedArgs = std::vector<std::string>();
     std::string argument("");
-    char symbol;
+    char prevSymbol;
+    char currSymbol=' ';
     for (int i = 0; i < notParsedArguments.length(); i++) {
-      symbol = notParsedArguments[i];
-      if ( ! std::isspace(symbol)) {
-        argument+=symbol;
-      } else {
+      prevSymbol = currSymbol;
+      currSymbol = notParsedArguments[i];
+      if ( ! std::isspace(currSymbol)) {
+        argument+=currSymbol;
+      } else if (! std::isspace(prevSymbol)){
         parsedArgs.push_back(argument);
         argument.clear();
       }
     }
-    parseArgs.push_back(argument);
+    if (!argument.empty()) {
+      parsedArgs.push_back(argument);
+    }
     parsedArgs.erase(parsedArgs.begin()); //because it's the command name
     return parsedArgs;
   }

@@ -8,7 +8,7 @@ void Shell::start() {
   while(std::getline(in, commandWithArgs, '\n')) {
     ShellCommand* cmd = commands[getCommandName(commandWithArgs)];
     if (cmd == NULL) {
-      out << "command not found";
+      out << "command not found" << std::endl;
     } else {
       cmd->run(commandWithArgs);
       if (cmd->getName() == "quit") {

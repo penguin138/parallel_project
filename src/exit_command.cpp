@@ -7,8 +7,8 @@ public:
     ShellCommand::name = std::string("quit");
   }
   virtual void run (std::string args) {
-    out << args;
     std::vector<std::string> parsedArgs = parseArguments(args);
-    checkNumberOfArguments(parsedArgs.size(), 0, out);
+    //we don't check number of args here, because we assume that
+    //shell will terminate anyway, if quit is written.
   }
 };

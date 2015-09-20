@@ -7,8 +7,10 @@ public:
     ShellCommand::name = std::string("start");
   }
   virtual void run(std::string args) {
-    out << args;
     std::vector<std::string> parsedArgs = parseArguments(args);
-    checkNumberOfArguments(parsedArgs.size(), 0, out);
+    /*for (int i = 0; i < parsedArgs.size(); i++) {
+      out << parsedArgs[i] << std::endl;
+    }*/
+    checkNumberOfArguments(parsedArgs.size(), 2, 3, out);
   }
 };
