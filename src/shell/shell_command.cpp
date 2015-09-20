@@ -1,23 +1,29 @@
-#include "./headers/shell_command.h"
+#include "shell_command.h"
 
   ShellCommand::ShellCommand():name(""){}
 
-  void ShellCommand::checkNumberOfArguments(int real, int expected, std::ostream& out) {
+  bool ShellCommand::checkNumberOfArguments(int real, int expected, std::ostream& out) {
     if (real < expected) {
       out << "too few arguments: expected "<< expected << std::endl;
+      return false;
     } else if (real > expected){
         out << "too many arguments: expected " << expected << std::endl;
+        return false;
     }
+    return true;
   }
-  void ShellCommand::checkNumberOfArguments(int real, int expected1, int expected2, std::ostream &out) {
+  bool ShellCommand::checkNumberOfArguments(int real, int expected1, int expected2, std::ostream &out) {
     if (real < expected1 && real < expected2) {
       out << "too few arguments: expected "<< expected1 << " or " << expected2 << std::endl;
+      return false;
     } else if (real > expected1 && real > expected2) {
         out << "too many arguments: expected " << expected1 << " or " << expected2 << std::endl;
+        return false;
     } else if ((real > expected1 && real < expected2) || (real > expected2 && real < expected1)) {
        out << "incorrect number of arguments: expected " << expected1 << " or " << expected2 << std::endl;
+       return false;
     }
-
+    return true;
   }
   void ShellCommand::run(std::string arguments) {}
 

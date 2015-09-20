@@ -1,2 +1,5 @@
+INCLUDES1 = -I "./headers"
+INCLUDES2 = -I "./src/shell"
+
 all:
-		clang++ -g ./src/shell.cpp ./src/shell_command.cpp ./src/start_command.cpp ./src/exit_command.cpp ./src/main.cpp -o life
+		clang++ -g  -o life ${INCLUDES1}  ${INCLUDES2} $(wildcard ./src/*.cpp) $(wildcard ./src/shell/*.cpp)

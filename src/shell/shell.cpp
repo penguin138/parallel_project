@@ -1,4 +1,4 @@
-#include "./headers/shell.h"
+#include "shell.h"
 
 Shell::Shell(const std::map<std::string, ShellCommand* >& newCommands, std::ostream& out, std::istream& in):
 commands(newCommands),in(in),out(out){}

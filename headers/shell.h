@@ -1,3 +1,4 @@
+#pragma once
 #include "shell_command.h"
 #include <map>
 

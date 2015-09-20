@@ -18,10 +18,10 @@ public:
   }
 
   //checks whether the number of arguments is correct, used in all commands.
-  void checkNumberOfArguments(int real, int expected, std::ostream& out);
+  bool checkNumberOfArguments(int real, int expected, std::ostream& out);
 
   //does the same thing as previous command, but with two possible variants.
-  void checkNumberOfArguments(int real, int expected1, int expected2, std::ostream& out);
+  bool checkNumberOfArguments(int real, int expected1, int expected2, std::ostream& out);
 
   //parses command arguments, used in all commands.
   std::vector<std::string> parseArguments(std::string notParsedArguments);
