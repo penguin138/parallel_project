@@ -3,7 +3,7 @@
 
 class ExitCommand: public ShellCommand {
   std::ostream& out;
-  FieldManager manager;
+  FieldManager& manager;
 public:
   ExitCommand(std::ostream& out, FieldManager& manager): out(out), manager(manager) {
     ShellCommand::name = std::string("quit");

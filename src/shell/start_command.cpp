@@ -1,10 +1,9 @@
 #include "shell_command.h"
 #include "field_manager.h"
 #include <cstdlib>
-
 class StartCommand: public ShellCommand {
   std::ostream& out;
-  FieldManager manager;
+  FieldManager& manager;
 public:
   StartCommand(std::ostream& out, FieldManager& manager):out(out),manager(manager) {
     ShellCommand::name = std::string("start");

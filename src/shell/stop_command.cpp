@@ -3,7 +3,7 @@
 
 class StopCommand: public ShellCommand {
   std::ostream& out;
-  FieldManager manager;
+  FieldManager& manager;
 public:
   StopCommand(std::ostream& out, FieldManager& manager):out(out),manager(manager) {
     ShellCommand::name = "stop";

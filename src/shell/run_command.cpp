@@ -4,7 +4,7 @@
 
 class RunCommand: public ShellCommand {
   std::ostream& out;
-  FieldManager manager;
+  FieldManager& manager;
 public:
   RunCommand(std::ostream& out, FieldManager& manager):out(out),manager(manager) {
     ShellCommand::name = "run";

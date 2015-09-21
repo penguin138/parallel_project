@@ -3,29 +3,27 @@
 #include <stdlib.h>
 #include <ctime>
 #include <fstream>
+#include <unistd.h>
 
   FieldManager::FieldManager(std::ostream& out):out(out){}
 
   void FieldManager::start(std::string fileName, int numberOfThreads) {
     currentIteration = 0;
     stopped = false;
-    numberOfiterations = 3;
+    numberOfiterations = LONG_MAX;
     this->numberOfThreads = numberOfThreads;
     parseCSV(fileName);
-    run(numberOfiterations);
   }
 
   void FieldManager::start(long width, long height, int numberOfThreads) {
     currentIteration = 0;
     stopped = false;
-    numberOfiterations = 3;
+    numberOfiterations = LONG_MAX;
     this->numberOfThreads = numberOfThreads;
     generateField(width, height);
-    run(numberOfiterations);
   }
 
   void FieldManager::status() {
-    out << std::endl;
     for (long i = 0; i < field.size(); i++) {
         for(long j = 0; j < field[i].size(); j++) {
             if (field[i][j]) {
@@ -33,6 +31,7 @@
             } else {
               out << ' ';
             }
+            //out << field[i][j] << " ";
         }
         out << std::endl;
     }
@@ -42,6 +41,9 @@
     for (long i = 0; i < numberOfIterations && ! stopped; i++) {
       currentIteration++;
       runIteration();
+      system("clear");
+      status();
+      usleep(100000);
     }
   }
 
@@ -75,9 +77,10 @@
     long m = field[0].size();
     for (int deltaI = -1; deltaI < 2; deltaI++) {
       for (int deltaJ = -1; deltaJ < 2; deltaJ++) {
-        sum += field[n + i + deltaI % n][m + j + deltaJ % m];
+        sum += field[(n + i + deltaI) % n][(m + j + deltaJ) % m];
       }
     }
+    sum -= field[i][j];
     return sum;
   }
   //TODO: implement correct parser for CSV.
@@ -101,8 +104,8 @@
   void FieldManager::generateField(long wigth, long height) {
     field = std::vector<std::vector<bool> >(height, std::vector<bool>(wigth,0));
     srand(time(0));
-    for(int i = 0; i < wigth; i++) {
-      for(int j = 0; j < height; j++) {
+    for(int i = 0; i < height; i++) {
+      for(int j = 0; j < wigth; j++) {
         field[i][j] = rand()%2;
       }
     }
