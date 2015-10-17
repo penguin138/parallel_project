@@ -41,9 +41,9 @@
     for (long i = 0; i < numberOfIterations && ! stopped; i++) {
       currentIteration++;
       runIteration();
-      system("clear");
+      /*system("clear");
       status();
-      usleep(100000);
+      usleep(100000);*/
     }
   }
 

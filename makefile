@@ -1,5 +1,7 @@
 INCLUDES1 = -I "./headers"
 INCLUDES2 = -I "./src/shell"
 
-all:
-		clang++ -g  -o life ${INCLUDES1}  ${INCLUDES2} $(wildcard ./src/*.cpp) $(wildcard ./src/shell/*.cpp)
+life:
+		g++ -o life ${INCLUDES1}  ${INCLUDES2} ./src/field_manager.cpp ./src/main.cpp $(wildcard ./src/shell/*.cpp)
+test:
+		g++ -o test ${INCLUDES1}  ${INCLUDES2} ./src/field_manager.cpp ./src/benchmark.cpp $(wildcard ./src/shell/*.cpp)
