@@ -75,9 +75,22 @@
     int sum = 0;
     long n = field.size();
     long m = field[0].size();
+    long p,q;
     for (int deltaI = -1; deltaI < 2; deltaI++) {
       for (int deltaJ = -1; deltaJ < 2; deltaJ++) {
-        sum += field[(n + i + deltaI) % n][(m + j + deltaJ) % m];
+        p = i+deltaI;
+        q = j+deltaJ;
+        if (p >= n) {
+          p = 0;
+        } else if (p < 0) {
+          p = n - 1;
+        }
+        if (q >= m) {
+          q = 0;
+        } else if (q < 0) {
+          q = m - 1;
+        }
+        sum += field[p][q];
       }
     }
     sum -= field[i][j];
