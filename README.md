@@ -18,5 +18,8 @@ When using interactive version you can execute the following commands:
 * ```status``` - shows field
 * ```quit``` - waits for threads to finish and quits
 
-When using benchmark version you just type 4 parameters:
-width, height, number of threads and number of iterations.
+When using benchmark version you just type the following:
+
+```./test width height number_of_threads number_of_iterations```
+
+Also you can run series of tests by executing cluster_test.sh
