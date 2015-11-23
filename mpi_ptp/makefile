@@ -1,12 +1,13 @@
 INCLUDES = -I "./headers"
+COMMON_LIB = -I "../common_lib/"
 
 #test version
 test: clean
-		mpiCC ./src/mpi_test.cpp -o mpi_test
+		mpiCC ./src/mpi_test.cpp -o test
 
 #interactive version
 life: clean
-		mpiCC ${INCLUDES} -O2 ./src/field_manager.cpp ./src/thread.cpp ./src/main.cpp  -o mpi_life
+		mpiCC ${INCLUDES} ${COMMON_LIB} -O2 ./src/field_manager.cpp ./src/thread.cpp ./src/main.cpp  -o life
 
 clean:
-		-rm -f mpi_life mpi_test
+		-rm -f life test

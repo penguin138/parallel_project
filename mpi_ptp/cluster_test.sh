@@ -16,7 +16,7 @@ do
     do
       printf "$threads threads: \n"
       printf "%s\t\t%s\t\t%s\t\t" $iters  $size  $threads >> $file
-      mpirun -np $threads+1 ./life $size $size $iters >> $file
+      mpirun -np $threads+1 ./mpi_life $size $size $iters >> $file
       printf "\n" >> $file
     done
   done

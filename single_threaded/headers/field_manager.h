@@ -30,7 +30,7 @@ public:
   void stop();
 
   //terminates Game of Life.
-  void quit();
+  void quit(bool useless);
 private:
   //parses CSV file.
   void parseCSV(std::string fileName);

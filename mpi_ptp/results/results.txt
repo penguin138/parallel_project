@@ -1,480 +1,283 @@
 iterations	fieldSize	threads		time
-10		100		1		5.592e-06 s
+10		100		1		1.368e-06 s
 
-10		100		2		0.00988692 s
+10		100		2		0.0117433 s
 
-10		100		3		0.107451 s
+10		100		3		0.0155683 s
 
-10		100		4		0.116979 s
+10		100		4		0.121101 s
 
-10		100		5		0.152997 s
+10		100		5		0.130256 s
 
-10		100		6		0.147544 s
+10		100		6		0.177402 s
 
-10		100		7		0.141076 s
+10		100		7		0.131587 s
 
-10		100		8		0.119578 s
+10		100		8		0.135641 s
 
-10		200		1		1.5e-06 s
+10		200		1		1.488e-06 s
 
-10		200		2		0.0356787 s
+10		200		2		0.0358766 s
 
-10		200		3		0.0905311 s
+10		200		3		0.102632 s
 
-10		200		4		0.106601 s
+10		200		4		0.0974241 s
 
-10		200		5		0.138548 s
+10		200		5		0.131797 s
 
-10		200		6		0.125305 s
+10		200		6		0.154636 s
 
-10		200		7		0.150646 s
+10		200		7		0.174685 s
 
-10		200		8		0.158686 s
+10		200		8		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-10		300		1		2.088e-06 s
+10		300		1		1.5e-06 s
 
-10		300		2		0.0817043 s
+10		300		2		0.0858036 s
 
-10		300		3		0.10545 s
+10		300		3		0.112997 s
 
-10		300		4		0.135453 s
+10		300		4		0.108924 s
 
-10		300		5		0.161803 s
+10		300		5		0.132206 s
 
-10		300		6		0.168843 s
+10		300		6		0.137064 s
 
-10		300		7		0.157955 s
+10		300		7		0.140858 s
 
-10		300		8		0.17291 s
+10		300		8		0.157029 s
 
-10		400		1		2.352e-06 s
+10		400		1		1.704e-06 s
 
-10		400		2		0.146029 s
+10		400		2		0.142966 s
 
-10		400		3		0.182587 s
+10		400		3		0.158519 s
 
-10		400		4		0.15101 s
+10		400		4		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-10		400		5		0.190748 s
+10		400		5		0.161108 s
 
-10		400		6		0.199858 s
+10		400		6		0.174511 s
 
-10		400		7		0.198613 s
+10		400		7		0.158984 s
 
-10		400		8		0.126831 s
+10		400		8		0.163981 s
 
-10		500		1		4.908e-06 s
+10		500		1		5.064e-06 s
 
-10		500		2		0.228187 s
+10		500		2		0.221053 s
 
-10		500		3		0.252071 s
+10		500		3		0.2555 s
 
-10		500		4		0.269738 s
+10		500		4		0.251981 s
 
-10		500		5		0.255778 s
+10		500		5		0.242813 s
 
-10		500		6		0.254753 s
+10		500		6		0.219584 s
 
-10		500		7		0.196064 s
+10		500		7		0.192953 s
 
-10		500		8		0.212181 s
+10		500		8		0.207895 s
 
-10		600		1		2.928e-06 s
+10		600		1		9.468e-06 s
 
-10		600		2		0.316903 s
+10		600		2		0.320757 s
 
-10		600		3		0.336843 s
+10		600		3		0.331963 s
 
-10		600		4		0.316081 s
+10		600		4		0.299762 s
 
-10		600		5		0.398213 s
+10		600		5		0.36871 s
 
-10		600		6		0.455485 s
+10		600		6		0.419545 s
 
-10		600		7		0.26818 s
+10		600		7		0.292043 s
 
-10		600		8		0.296408 s
+10		600		8		0.30144 s
 
-10		700		1		5.316e-06 s
+10		700		1		6.936e-06 s
 
-10		700		2		0.43042 s
+10		700		2		0.43088 s
 
-10		700		3		0.494838 s
+10		700		3		0.464762 s
 
-10		700		4		0.384993 s
+10		700		4		0.379284 s
 
-10		700		5		0.448918 s
+10		700		5		0.410972 s
 
-10		700		6		0.459337 s
+10		700		6		0.510827 s
 
-10		700		7		0.514069 s
+10		700		7		0.482283 s
 
-10		700		8		0.53748 s
+10		700		8		0.68665 s
 
-10		800		1		6.84e-06 s
+10		800		1		4.896e-06 s
 
-10		800		2		0.561604 s
+10		800		2		0.560076 s
 
-10		800		3		0.566931 s
+10		800		3		0.610896 s
 
-10		800		4		0.490264 s
+10		800		4		0.493298 s
 
-10		800		5		0.556653 s
+10		800		5		0.553967 s
 
-10		800		6		0.519528 s
+10		800		6		0.558786 s
 
-10		800		7		0.549642 s
+10		800		7		0.573833 s
 
-10		800		8		0.524147 s
+10		800		8		0.589779 s
 
-10		900		1		5.22e-06 s
+10		900		1		5.46e-06 s
 
-10		900		2		0.734807 s
+10		900		2		0.697028 s
 
-10		900		3		0.690739 s
+10		900		3		0.694014 s
 
-10		900		4		0.592972 s
+10		900		4		0.595104 s
 
-10		900		5		0.630651 s
+10		900		5		0.684664 s
 
-10		900		6		0.664942 s
+10		900		6		0.657211 s
 
-10		900		7		0.725307 s
+10		900		7		0.656274 s
 
-10		900		8		0.68255 s
+10		900		8		0.688053 s
 
-10		1000		1		5.244e-06 s
+10		1000		1		4.32e-06 s
 
-10		1000		2		0.871635 s
+10		1000		2		0.880404 s
 
-10		1000		3		0.957458 s
+10		1000		3		0.945746 s
 
-10		1000		4		0.745269 s
+10		1000		4		0.716598 s
 
-10		1000		5		0.757905 s
+10		1000		5		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-10		1000		6		0.716777 s
+10		1000		6		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-10		1000		7		0.768779 s
+10		1000		7		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-10		1000		8		0.811455 s
+10		1000		8		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		100		1		1.332e-06 s
+100		100		1		1.488e-06 s
 
-100		100		2		0.089985 s
+100		100		2		0.0896862 s
 
-100		100		3		0.216904 s
+100		100		3		0.107519 s
 
-100		100		4		0.967608 s
+100		100		4		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		100		5		1.12816 s
+100		100		5		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		100		6		1.30758 s
+100		100		6		1.24755 s
 
-100		100		7		1.09965 s
+100		100		7		1.22369 s
 
-100		100		8		1.14921 s
+100		100		8		1.11958 s
 
-100		200		1		4.824e-06 s
+100		200		1		1.848e-06 s
 
-100		200		2		0.337597 s
+100		200		2		0.336785 s
 
-100		200		3		0.426606 s
+100		200		3		0.526684 s
 
-100		200		4		0.907423 s
+100		200		4		0.826642 s
 
-100		200		5		1.09859 s
+100		200		5		1.01864 s
 
-100		200		6		1.28265 s
+100		200		6		1.24264 s
 
-100		200		7		1.21933 s
+100		200		7		1.03458 s
 
-100		200		8		1.15855 s
+100		200		8		1.07466 s
 
-100		300		1		3.936e-06 s
+100		300		1		2.784e-06 s
 
-100		300		2		0.776688 s
+100		300		2		0.765532 s
 
-100		300		3		0.897128 s
+100		300		3		0.906345 s
 
-100		300		4		0.917132 s
+100		300		4		0.941116 s
 
-100		300		5		1.16447 s
+100		300		5		1.16089 s
 
-100		300		6		1.28908 s
+100		300		6		1.2525 s
 
-100		300		7		1.17024 s
+100		300		7		1.30086 s
 
-100		300		8		1.24478 s
+100		300		8		1.27697 s
 
-100		400		1		4.896e-06 s
+100		400		1		5.16e-06 s
 
-100		400		2		1.36221 s
+100		400		2		1.33759 s
 
-100		400		3		1.51252 s
+100		400		3		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		400		4		1.3828 s
+100		400		4		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		400		5		1.47874 s
+100		400		5		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		400		6		1.52283 s
+100		400		6		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		400		7		1.59728 s
+100		400		7		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		400		8		1.19097 s
+100		400		8		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		500		1		4.764e-06 s
+100		500		1		9.744e-06 s
 
-100		500		2		2.14717 s
+100		500		2		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		500		3		2.33197 s
+100		500		3		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		500		4		1.99128 s
+100		500		4		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		500		5		2.02742 s
+100		500		5		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		500		6		2.04362 s
+100		500		6		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		500		7		1.84677 s
+100		500		7		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		500		8		1.73084 s
+100		500		8		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		600		1		4.824e-06 s
+100		600		1		8.88e-06 s
 
-100		600		2		3.046 s
+100		600		2		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		600		3		3.2025 s
+100		600		3		[mpiexec@nastya-Aspire-ES1-111] Sending Ctrl-C to processes as requested
+[mpiexec@nastya-Aspire-ES1-111] Press Ctrl-C again to force abort
 
-100		600		4		2.6564 s
+100		600		4		2.60671 s
 
-100		600		5		2.7195 s
+100		600		5		2.70003 s
 
-100		600		6		2.69753 s
+100		600		6		2.57176 s
 
-100		600		7		2.62056 s
+100		600		7		2.70483 s
 
-100		600		8		2.66781 s
+100		600		8		2.80613 s
 
-100		700		1		9.732e-06 s
+100		700		1		7.632e-06 s
 
-100		700		2		4.1092 s
-
-100		700		3		4.23169 s
-
-100		700		4		3.29105 s
-
-100		700		5		3.60542 s
-
-100		700		6		3.44678 s
-
-100		700		7		3.41589 s
-
-100		700		8		3.20562 s
-
-100		800		1		4.8e-06 s
-
-100		800		2		5.72214 s
-
-100		800		3		5.39451 s
-
-100		800		4		4.23115 s
-
-100		800		5		4.51874 s
-
-100		800		6		4.05384 s
-
-100		800		7		4.23717 s
-
-100		800		8		3.82245 s
-
-100		900		1		4.68e-06 s
-
-100		900		2		6.81172 s
-
-100		900		3		6.915 s
-
-100		900		4		4.9675 s
-
-100		900		5		5.56505 s
-
-100		900		6		4.91213 s
-
-100		900		7		5.00251 s
-
-100		900		8		4.87502 s
-
-100		1000		1		4.896e-06 s
-
-100		1000		2		8.31514 s
-
-100		1000		3		8.08618 s
-
-100		1000		4		6.05813 s
-
-100		1000		5		6.71911 s
-
-100		1000		6		6.25737 s
-
-100		1000		7		6.06071 s
-
-100		1000		8		5.62523 s
-
-1000		100		1		1.98e-06 s
-
-1000		100		2		0.878413 s
-
-1000		100		3		1.19153 s
-
-1000		100		4		8.3911 s
-
-1000		100		5		9.68604 s
-
-1000		100		6		10.8955 s
-
-1000		100		7		11.1011 s
-
-1000		100		8		11.182 s
-
-1000		200		1		1.44e-06 s
-
-1000		200		2		3.43037 s
-
-1000		200		3		4.63376 s
-
-1000		200		4		8.22221 s
-
-1000		200		5		10.4387 s
-
-1000		200		6		12.2546 s
-
-1000		200		7		12.3267 s
-
-1000		200		8		11.417 s
-
-1000		300		1		1.728e-06 s
-
-1000		300		2		7.70512 s
-
-1000		300		3		8.3009 s
-
-1000		300		4		9.84078 s
-
-1000		300		5		11.2328 s
-
-1000		300		6		12.7969 s
-
-1000		300		7		11.801 s
-
-1000		300		8		12.2166 s
-
-1000		400		1		4.152e-06 s
-
-1000		400		2		13.4328 s
-
-1000		400		3		14.2949 s
-
-1000		400		4		13.2162 s
-
-1000		400		5		14.7451 s
-
-1000		400		6		15.5999 s
-
-1000		400		7		14.8386 s
-
-1000		400		8		12.9966 s
-
-1000		500		1		5.233e-06 s
-
-1000		500		2		20.8824 s
-
-1000		500		3		22.0877 s
-
-1000		500		4		17.0022 s
-
-1000		500		5		20.3461 s
-
-1000		500		6		19.8655 s
-
-1000		500		7		17.9877 s
-
-1000		500		8		17.5877 s
-
-1000		600		1		5.736e-06 s
-
-1000		600		2		30.5418 s
-
-1000		600		3		30.3245 s
-
-1000		600		4		25.3035 s
-
-1000		600		5		25.9995 s
-
-1000		600		6		25.3536 s
-
-1000		600		7		25.9476 s
-
-1000		600		8		26.9968 s
-
-1000		700		1		5.64e-06 s
-
-1000		700		2		40.6814 s
-
-1000		700		3		41.7362 s
-
-1000		700		4		30.8692 s
-
-1000		700		5		35.5598 s
-
-1000		700		6		35.3732 s
-
-1000		700		7		31.5996 s
-
-1000		700		8		29.9586 s
-
-1000		800		1		5.16e-06 s
-
-1000		800		2		53.0547 s
-
-1000		800		3		53.0408 s
-
-1000		800		4		40.9877 s
-
-1000		800		5		44.3366 s
-
-1000		800		6		39.4338 s
-
-1000		800		7		41.0498 s
-
-1000		800		8		37.06 s
-
-1000		900		1		5.412e-06 s
-
-1000		900		2		67.3426 s
-
-1000		900		3		66.3902 s
-
-1000		900		4		49.0045 s
-
-1000		900		5		54.0564 s
-
-1000		900		6		48.6396 s
-
-1000		900		7		48.1642 s
-
-1000		900		8		45.7977 s
-
-1000		1000		1		5.004e-06 s
-
-1000		1000		2		84.0642 s
-
-1000		1000		3		81.6839 s
-
-1000		1000		4		59.8307 s
-
-1000		1000		5		65.7727 s
-
-1000		1000		6		60.4595 s
-
-1000		1000		7		58.5912 s
-
-1000		1000		8		53.102 s
+100		700		2		

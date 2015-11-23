@@ -5,7 +5,7 @@
 #include <fstream>
 #include <unistd.h>
 #include <pthread.h>
-#include "exceptions.h"
+#include "../common_lib/headers/exceptions.h"
 
   FieldManager::FieldManager(std::ostream& out):out(out){
     threadsCreated = false;

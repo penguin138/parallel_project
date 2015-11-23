@@ -1,17 +1,18 @@
-#include "shell_command.h"
+#include "../headers/shell_command.h"
 #include "field_manager.h"
 
-class StopCommand: public ShellCommand {
+class StatusCommand: public ShellCommand {
   std::ostream& out;
   FieldManager& manager;
 public:
-  StopCommand(std::ostream& out, FieldManager& manager):out(out),manager(manager) {
-    ShellCommand::name = "stop";
+  StatusCommand(std::ostream& out, FieldManager& manager):out(out),manager(manager) {
+    ShellCommand::name = "status";
   }
   virtual void run(std::string notParsedArgs) {
+    out << "in status!\n";
     std::vector<std::string> parsedArgs = parseArguments(notParsedArgs);
     if (checkNumberOfArguments(parsedArgs.size(), 0, out)) {
-      manager.stop();
+      manager.status();
     }
   }
 };

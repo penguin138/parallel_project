@@ -1,11 +1,11 @@
-INCLUDES1 = -I "./headers"
-INCLUDES2 = -I "./src/shell"
+COMMON_LIB = -I "../common_lib/"
+INCLUDE1 = -I "./headers/"
 
-life:
-		g++ -pthread -lrt -O3 -o life ${INCLUDES1}  ${INCLUDES2} ./src/field_manager.cpp ./src/thread.cpp ./src/main.cpp $(wildcard ./src/shell/*.cpp)
+life: clean
+		g++ -pthread -lrt -O3 -o life ${COMMON_LIB} ${INCLUDE1} ./src/field_manager.cpp ./src/thread.cpp ./src/main.cpp $(wildcard ../common_lib/shell/*.cpp)
 
-test:
-		g++ -pthread -lrt -O3 -o test ${INCLUDES1}  ${INCLUDES2} ./src/field_manager.cpp ./src/thread.cpp ./src/benchmark.cpp $(wildcard ./src/shell/*.cpp)
+test: clean
+		g++ -pthread -lrt -O3 -o test ${COMMON_LIB} ${INCLUDE1} ./src/field_manager.cpp ./src/thread.cpp ./src/benchmark.cpp $(wildcard ../common_lib/shell/*.cpp)
 
 clean:
 		-rm -f life test

@@ -1,10 +1,6 @@
-#include "shell.h"
+#include "../common_lib/headers/shell.h"
 #include "field_manager.h"
-#include "start_command.cpp"
-#include "exit_command.cpp"
-#include "run_command.cpp"
-#include "status_command.cpp"
-#include "stop_command.cpp"
+#include "../common_lib/headers/field_manager_commands.h"
 #include <map>
 
 using namespace std;

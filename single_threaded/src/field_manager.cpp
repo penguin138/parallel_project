@@ -52,7 +52,7 @@
       out << "iteration number: " << currentIteration << std::endl;
   }
 
-  void FieldManager::quit() {
+  void FieldManager::quit(bool useless) {
     //single threaded version.
   }
 

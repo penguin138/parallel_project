@@ -1,5 +1,5 @@
 #pragma once
-#include "typedefs.h"
+#include "../common_lib/headers/typedefs.h"
 #include <pthread.h>
 #include <semaphore.h>
 #include <vector>

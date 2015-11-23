@@ -1,4 +1,4 @@
-#include "shell_command.h"
+#include "../headers/shell_command.h"
 #include "field_manager.h"
 
 class ExitCommand: public ShellCommand {
@@ -12,6 +12,6 @@ public:
     std::vector<std::string> parsedArgs = parseArguments(args);
     //we don't check number of args here, because we assume that
     //shell will terminate anyway, if quit is written.
-    manager.quit();
+    manager.quit(true);
   }
 };

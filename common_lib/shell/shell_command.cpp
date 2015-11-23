@@ -1,4 +1,4 @@
-#include "shell_command.h"
+#include "../headers/shell_command.h"
 
   ShellCommand::ShellCommand():name(""){}
 

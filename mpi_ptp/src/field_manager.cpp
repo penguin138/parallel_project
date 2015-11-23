@@ -2,7 +2,7 @@
 #include <climits>
 #include <stdlib.h>
 #include <fstream>
-#include "exceptions.h"
+#include "../common_lib/headers/exceptions.h"
 #include <mpi.h>
 
   FieldManager::FieldManager(std::ostream& out):out(out){}

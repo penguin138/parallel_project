@@ -1,25 +1,38 @@
 # parallel_project
 [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) project for Parallel and Distributed Computing course at MIPT 2015.
 
-There are two versions of the project: single threaded version(it's created for tests) is on branch master
-and multi-threaded version is on branch multithreaded-version.
+## Versions
 
-Here is how to use them:
+- [x] single threaded (it was created for tests)
+- [x] using pthreads
+- [x] using MPI point to point operations
+- [ ] using MPI collective operations
+- [ ] using OpenMP
+
+## Usage
+
+#### Compiling:
 
 * ```make life``` creates interactive version of Game of Life called life
 * ```make test``` creates benchmark version called test
 
-When using interactive version you can execute the following commands:
+#### When using interactive version you can execute the following commands:
 
 * ```start width height number_of_threads``` - game set up
 * ```start field_layout.csv number_of_threads``` - game set up
 * ```run number_of_iterations``` - launches the game
 * ```stop``` - stops the game
 * ```status``` - shows field
-* ```quit``` - waits for threads to finish and quits
+* ```quit``` - waits for workers to finish and quits
 
-When using benchmark version you just type the following:
+#### Benchmark usage depends on version:
 
-```./test width height number_of_threads number_of_iterations```
+* pthreads and single threaded:
 
-Also you can run series of tests by executing cluster_test.sh
+  ```./test width height number_of_threads number_of_iterations```
+* both MPI versions:
+
+  ``` mpirun -np number_of_threads ./test width height number_of_iterations```
+
+
+Also you can run series of tests by executing ```./cluster_test.sh```
