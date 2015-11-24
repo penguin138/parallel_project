@@ -1,6 +1,6 @@
 #include "../common_lib/headers/shell.h"
 #include "field_manager.h"
-#include "../common_lib/headers/field_manager_commands.h"
+#include "../headers/field_manager_commands.h"
 #include <map>
 
 using namespace std;

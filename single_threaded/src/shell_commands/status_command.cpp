@@ -1,4 +1,4 @@
-#include "../headers/shell_command.h"
+#include "../../../common_lib/headers/shell_command.h"
 #include "field_manager.h"
 
 class StatusCommand: public ShellCommand {

@@ -1,7 +1,7 @@
-#include "../headers/shell_command.h"
-#include "field_manager.h"
+#include "../../../common_lib/headers/shell_command.h"
+#include "../../headers/field_manager.h"
 #include <cstdlib>
-#include "../headers/exceptions.h"
+#include "../../../common_lib/headers/exceptions.h"
 
 class StartCommand: public ShellCommand {
   std::ostream& out;

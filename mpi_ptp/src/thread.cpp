@@ -1,5 +1,5 @@
-#include "thread.h"
-#include "field_manager.h"
+#include "../headers/thread.h"
+#include "../headers/field_manager.h"
 #include <cstdlib>
 #include <vector>
 #include <iostream>

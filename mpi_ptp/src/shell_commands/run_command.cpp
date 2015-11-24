@@ -1,5 +1,5 @@
-#include "../headers/shell_command.h"
-#include "field_manager.h"
+#include "../../../common_lib/headers/shell_command.h"
+#include "../../headers/field_manager.h"
 #include <cstdlib>
 
 class RunCommand: public ShellCommand {

@@ -19,6 +19,12 @@ public:
   //starts Game of Life with random distribution.
   void start(ll width, ll height, int numberOfThreads);
 
+  void quit(bool b);
+
+  void stop();
+
+  void run(ll iterations);
+
   //shows current iteration.
   void status();
 
