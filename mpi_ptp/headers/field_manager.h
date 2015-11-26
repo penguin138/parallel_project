@@ -8,6 +8,7 @@
 class FieldManager {
   fieldType field;
   int numberOfThreads;
+  bool stopped;
   std::ostream& out;
 public:
   //constructs field manager.
@@ -19,24 +20,29 @@ public:
   //starts Game of Life with random distribution.
   void start(ll width, ll height, int numberOfThreads);
 
+  // quits
   void quit(bool b);
 
+  //stops Game of Life
   void stop();
 
+  //launches Game of Life for given number of iterations.
   void run(ll iterations);
 
   //shows current iteration.
   void status();
 
+  //sends initial parts to workers.
   void sendInitialParts();
 
   //polls workers and gathers their computed parts of field.
   void gatherField();
 
 private:
-
+  //unpacks received bool array to fieldType.
   fieldType unpack(bool* packed,ll rowWidth, ll height);
 
+  //packs fieldType to bool array which can be sent by MPI_Send.
   bool* pack(fieldType unpacked);
 
   //determines a part of field, on which a thread will work.

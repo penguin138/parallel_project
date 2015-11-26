@@ -36,21 +36,28 @@
     MPI_Status status;
     for (int i = 1; i < numberOfThreads + 1;i++) {
       MPI_Send(&stop,0,MPI_INT,i,STOP_TAG,MPI_COMM_WORLD);
-      MPI_Recv(iters + i - 1,1,MPI_LONG_LONG,i,SYNC_TAG,MPI_COMM_WORLD,&status);
+      //MPI_Recv(iters + i - 1,1,MPI_LONG_LONG,i,SYNC_TAG,MPI_COMM_WORLD,&status);
     }
     ll maxIt = 0;
-    for (int i=0;i< numberOfThreads;i++) {
-      //std::cout << i << ": " << iters[i] << std::endl;
+    /*for (int i=0;i< numberOfThreads;i++) {
+      std::cout << i << ": " << iters[i] << std::endl;
       if (iters[i] > maxIt) {
         maxIt = iters[i];
       }
     }
-    ll one;
-
+    ll one = 2;
+    ll zero = 1;
     for (int i = 1; i < numberOfThreads + 1; i++) {
-      one = 1 + maxIt - iters[i-1];
-      MPI_Send(&one,1,MPI_LONG_LONG,i,RUN_TAG,MPI_COMM_WORLD);
+      if (iters[i-1] != maxIt) {
+        MPI_Send(&one,1,MPI_LONG_LONG,i,RUN_TAG,MPI_COMM_WORLD);
+      } else {
+        MPI_Send(&zero,1,MPI_LONG_LONG,i,RUN_TAG,MPI_COMM_WORLD);
+      }
     }
+    for (int i = 1; i < numberOfThreads + 1;i++) {
+      //MPI_Request request;
+      MPI_Send(&stop,0,MPI_INT,i,STOP_TAG_2,MPI_COMM_WORLD);
+    }*/
     gatherField();
     //MPI_Status status;
     //MPI_Recv(&iter,1,MPI_LONG_LONG,1,5,MPI_COMM_WORLD,&status);
