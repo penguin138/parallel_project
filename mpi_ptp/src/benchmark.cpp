@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include <mpi.h>
 
-
-
 int main(int argc, char** argv) {
   int result;
   result = MPI_Init(&argc, &argv);
