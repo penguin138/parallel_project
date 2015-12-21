@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include "../common_lib/headers/exceptions.h"
+#include <omp.h>
 
   FieldManager::FieldManager(std::ostream& out):out(out){
     threadsCreated = false;
@@ -16,7 +17,9 @@
     stopped = true;
     running = false;
     numberOfiterations = 0;
-    this->numberOfThreads = numberOfThreads;
+    //omp_set_num_threads(numberOfThreads);
+    this->numberOfThreads = 1;
+    this->numberOfThreads1 = numberOfThreads;
     parseCSV(fileName);
     pthread_mutex_init(&stopMutex, NULL);
     pthread_cond_init(&needToStop, NULL);
@@ -35,7 +38,8 @@
     stopped = true;
     running = false;
     numberOfiterations = 0;
-    this->numberOfThreads = numberOfThreads;
+    this->numberOfThreads = 1;
+    this->numberOfThreads1 = numberOfThreads;
     generateField(width, height);
     pthread_mutex_init(&stopMutex, NULL);
     pthread_cond_init(&needToStop, NULL);
@@ -71,7 +75,7 @@
     threads = (Thread*) malloc(numberOfThreads*sizeof(Thread));
     for (int i = 0; i < numberOfThreads; i++) {
       new (threads + i) Thread(i, getThreadPart(i), getThreadBorders(i),
-       0, &needToStop, &stopMutex, *this);
+       0, &needToStop, &stopMutex, *this, numberOfThreads1);
     }
     for (int i = 0; i < numberOfThreads; i++) {
       threads[i].getAdjacentThreads(

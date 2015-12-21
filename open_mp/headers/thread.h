@@ -11,6 +11,7 @@ class Thread {
   int threadNumber;
   ll chunkWigth;
   ll chunkHeight;//it's height only of thread's part, without borders;
+  int numberOfThreads;
   Thread* leftThread; // adjacent
   Thread* rightThread; // threads;
   sem_t* leftSemaphore; // tells adjacent threads,
@@ -29,7 +30,7 @@ public:
   //constructs a new thread wrapper object.
   Thread(int threadNumber, fieldType myInitialPart, fieldType initialBorders,
     int numberOfIterations, pthread_cond_t* stopped, pthread_mutex_t* stopMutex,
-    FieldManager& manager);
+    FieldManager& manager, int numberOfThreads);
 
   //copies references to adjacent threads,important for border exchange.
   void getAdjacentThreads(Thread& leftThread, Thread& rightThread);

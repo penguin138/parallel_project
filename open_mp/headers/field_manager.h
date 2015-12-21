@@ -11,6 +11,7 @@ class FieldManager {
   ll numberOfiterations;
   ll currentIteration;
   int numberOfThreads;
+  int numberOfThreads1;
   std::ostream& out;
   bool stopped;
   bool running;

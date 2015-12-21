@@ -2,6 +2,7 @@
 #include "field_manager.h"
 #include "../headers/field_manager_commands.h"
 #include <map>
+#include <omp.h>
 
 using namespace std;
 

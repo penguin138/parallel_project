@@ -3,13 +3,15 @@
 #include <cstdlib>
 #include <vector>
 #include <iostream>
+#include <omp.h>
 
 Thread::Thread(int threadNumber, fieldType myInitialPart, fieldType myInitialBorders,
    int numberOfIterations, pthread_cond_t* stopped, pthread_mutex_t* stopMutex,
-    FieldManager& manager):
+    FieldManager& manager, int numberOfThreads):
 manager(manager),
 threadNumber(threadNumber),
-numberOfIterations(numberOfIterations) {
+numberOfIterations(numberOfIterations),
+numberOfThreads(numberOfThreads) {
   waiting = true;
   this->stopped = stopped;
   this->stopMutex = stopMutex;
@@ -83,17 +85,18 @@ void Thread::updateIterations(ll numberOfIterations) {
   this->numberOfIterations = numberOfIterations + currentIteration;
 }
 void Thread::run() {
+  omp_set_num_threads(numberOfThreads);
   while (!cancelled || waiting) {
-    pthread_mutex_lock(stopMutex);
+    //pthread_mutex_lock(stopMutex);
     //bool out = false;
     while (manager.wasStopped()) {
       /*if (!out) {
         std::cout << threadNumber << ": stopped" << std::endl;
         out = true;
       }*/
-      pthread_cond_wait(stopped, stopMutex);
+      //pthread_cond_wait(stopped, stopMutex);
     }
-    pthread_mutex_unlock(stopMutex);
+    //pthread_mutex_unlock(stopMutex);
     if (currentIteration < numberOfIterations && (!cancelled || waiting)) {
         //std::cout << threadNumber << ": current iteration is " << currentIteration << std::endl;
         oneIteration();
@@ -108,6 +111,7 @@ void Thread::run() {
 void Thread::oneIteration() {
   int sum;
   fieldType myNewPart(myPartWithBorders);
+  #pragma omp parallel for
   for (ll i = 1; i < chunkHeight + 1; i++) {
     for (ll j = 0; j < chunkWigth; j++) {
       sum = numberOfNeighbours(i, j);
