@@ -24,14 +24,17 @@ threadNumber(threadNumber) {
 }
 
 void Thread::receiveInitialPart() {
-  MPI_Status status1,status2,status3;
   ll chunkHeightWithBorders;
+  int sendBuf;
   //std::cout << threadNumber <<": receiving initial part.";
-  MPI_Recv(&chunkWidth,1,MPI_LONG_LONG,0,INIT_TAG,MPI_COMM_WORLD,&status1);
-  MPI_Recv(&chunkHeightWithBorders,1,MPI_LONG_LONG,0,INIT_TAG,MPI_COMM_WORLD,&status2);
+  MPI_Bcast(&chunkWidth,1,MPI_LONG_LONG,0,MPI_COMM_WORLD);
+  MPI_Scatter(&sendBuf,1,MPI_LONG_LONG,&chunkHeightWithBorders,1,MPI_LONG_LONG,0,MPI_COMM_WORLD);
   chunkHeight = chunkHeightWithBorders - 2;
   bool* initialPartArray = (bool*) malloc(sizeof(bool)*chunkWidth*chunkHeightWithBorders);
-  MPI_Recv(initialPartArray,chunkWidth*chunkHeightWithBorders,MPI::BOOL,0,INIT_TAG,MPI_COMM_WORLD,&status3);
+  std::cout << "thread " << threadNumber << " receiving" << std::endl;
+  std::cout << "thread " << threadNumber << ": " << chunkWidth*chunkHeightWithBorders << std::endl;
+  MPI_Scatterv(&sendBuf,&sendBuf,&sendBuf,MPI::BOOL,//fake args
+    initialPartArray,chunkWidth*chunkHeightWithBorders,MPI::BOOL,0,MPI_COMM_WORLD);
   //std::cout << threadNumber << ": part received." << std::endl;
   for(int i = 0;i < chunkHeightWithBorders; i++) {
     myPartWithBorders.push_back(std::vector<bool>());
@@ -52,8 +55,9 @@ void Thread::sendComputedPart() {
   for (int i = 0; i < chunkHeight; i++) {
     computedPart.push_back(myPartWithBorders[i+1]);
   }
+  int recvBuf;
   bool* computedPartArray = pack(computedPart);
-  MPI_Send(computedPartArray,chunkHeight*chunkWidth,MPI::BOOL,0,FIELD_TAG,MPI_COMM_WORLD);
+  MPI_Gatherv(computedPartArray,chunkHeight*chunkWidth,MPI::BOOL,&recvBuf,&recvBuf,&recvBuf,MPI::BOOL,0,MPI_COMM_WORLD);
   free(computedPartArray);
   //std::cout << threadNumber << " : here!" << std::endl;
 }

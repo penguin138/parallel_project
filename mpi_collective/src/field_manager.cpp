@@ -39,7 +39,7 @@
       MPI_Recv(iters + i - 1,1,MPI_LONG_LONG,i,SYNC_TAG,MPI_COMM_WORLD,&status);
     }
     ll maxIt = 0;
-    for (int i=0;i< numberOfThreads;i++) {
+    for (int i = 0;i< numberOfThreads;i++) {
       //std::cout << i << ": " << iters[i] << std::endl;
       if (iters[i] > maxIt) {
         maxIt = iters[i];
@@ -90,37 +90,50 @@
   }
 
   void FieldManager::sendInitialParts() {
-    fieldType threadBorders;
-    fieldType threadPartWithBorders;
-    bool* threadPartArray;
-    ll width,height;
+    fieldType upgradedField(field);
+    //little cheat to send borders to threads.
+    upgradedField.insert(upgradedField.begin(), field[field.size() - 1]);
+    upgradedField.insert(upgradedField.end(), field[0]);
+
+    bool* fieldArray = pack(upgradedField);
+    ll width = field[0].size();
     out << "sending parts..." << std::endl;
-    for(int i = 1; i < numberOfThreads + 1; i++) {
-      threadPartWithBorders = getThreadPart(i - 1);
-      threadBorders = getThreadBorders(i - 1);
-      threadPartWithBorders.insert(threadPartWithBorders.begin(),threadBorders[0]);
-      threadPartWithBorders.push_back(threadBorders[1]);
-      threadPartArray = pack(threadPartWithBorders);
-      height = threadPartWithBorders.size();
-      width = 0;
-      if (height > 0) {
-        width = threadPartWithBorders[0].size();
-      }
-      int result1, result2, result3;
-      out << "sending to thread " << i << std::endl;
-      //TODO: normal init send without multiple MPI_Send's
-      result1 = MPI_Send(&width, 1, MPI_LONG_LONG, i, INIT_TAG, MPI_COMM_WORLD);
-      result2 = MPI_Send(&height, 1, MPI_LONG_LONG, i, INIT_TAG, MPI_COMM_WORLD);
-      result3 = MPI_Send(threadPartArray, height * width, MPI::BOOL, i, INIT_TAG, MPI_COMM_WORLD);
-      if (result1 != MPI_SUCCESS || result2 != MPI_SUCCESS || result3 != MPI_SUCCESS) {
-        out << "initial send failed" << std::endl;
-        MPI_Finalize();
-        free(threadPartArray);
-        return;
-      }
-      out << "sent" << std::endl;
+    int* sendCounts = (int*) malloc((numberOfThreads + 1) * sizeof(int));
+    int* displacements = (int*) malloc((numberOfThreads + 1) * sizeof(int));
+    ll* heightsWithBorders = (ll*) malloc((numberOfThreads + 1)* sizeof(ll));
+    int recvBuf;
+    std::pair<ll,ll> pair;
+    sendCounts[0] = 0;
+    displacements[0] = 0;
+    heightsWithBorders[0] = 0;
+    for (int i = 1; i < numberOfThreads + 1; i++) {
+      pair = getChunkHeightAndFirstLine(i - 1);
+      sendCounts[i] = (pair.first + 2) * width;
+      //if (i > 1) {
+        displacements[i] = (pair.second) * width;
+      /*} else {
+        displacements[i-1] = 0;
+      }*/
+      heightsWithBorders[i] = pair.first + 2;
+      /*
+      std::cout << "thread " << i << ":" << std:: endl;
+      std::cout << "count " << sendCounts[i] << std::endl;
+      std::cout << "displ " << displacements[i] << std::endl;
+      std::cout << "heightWB " << heightsWithBorders[i] << std::endl;
+      */
     }
-    free(threadPartArray);
+    int maxSendCount = 0;
+    for (int i = 0; i < numberOfThreads;i++) {
+      if (sendCounts[i] > maxSendCount) {
+        maxSendCount = sendCounts[i];
+      }
+    }
+    std::cout <<"maxSendCount: "<< maxSendCount << std::endl;
+    std::cout << "field size: " << (field.size() + 2)*width << std::endl;
+    MPI_Bcast(&width,1,MPI_LONG_LONG,0,MPI_COMM_WORLD);
+    MPI_Scatter(heightsWithBorders,1,MPI_LONG_LONG,&recvBuf,1,MPI_LONG_LONG,0,MPI_COMM_WORLD);
+    MPI_Scatterv(fieldArray,sendCounts,displacements,MPI::BOOL,&recvBuf,maxSendCount,MPI::BOOL,0,MPI_COMM_WORLD);
+    free(fieldArray);
     out << "sending done" << std::endl;
   }
 
@@ -190,25 +203,29 @@
     ll rowHeight;
     ll firstLineNumber;
     bool* threadPart;
+    ll width = field[0].size();
+    ll height = field.size();
+    bool* fieldArray = (bool*) malloc(sizeof(bool)*width*height);
+    int sendBuf;
     ll chunkWidth = field[0].size();
+    int* recvCounts = (int*) malloc(sizeof(int)*(numberOfThreads + 1));
+    int* displacements = (int*) malloc(sizeof(int)*(numberOfThreads + 1));
+    recvCounts[0] = 0;
+    displacements[0] = 0;
     for(int i = 1; i < numberOfThreads + 1;i++) {
-      pair = getChunkHeightAndFirstLine(i-1);
-      rowHeight = pair.first;
-      firstLineNumber = pair.second;
-      MPI_Status status;
-      threadPart = (bool*) malloc(sizeof(bool) * rowHeight * chunkWidth);
-      out << "manager: receiving computed part from " << i << std::endl;
-      MPI_Recv(threadPart,rowHeight*chunkWidth,MPI::BOOL,i,FIELD_TAG,MPI_COMM_WORLD,&status);
-      out << "manager: received from " << i << std::endl;
-      for (int i = 0; i < rowHeight; i++) {
-        for(int j = 0; j < chunkWidth;j++) {
-          field[firstLineNumber + i][j] = threadPart[i*chunkWidth + j];
-        }
-      }
-    //  out << "manager: field updated" << std::endl;
-      free(threadPart);
-      //out << "temporary part freed" << std::endl;
+      pair = getChunkHeightAndFirstLine(i - 1);
+      recvCounts[i] = pair.first * width;
+      displacements[i] = pair.second * width;
     }
+    MPI_Gatherv(&sendBuf,sendBuf,MPI::BOOL,fieldArray,recvCounts,displacements,MPI::BOOL,0,MPI_COMM_WORLD);
+    //  out << "manager: field updated" << std::endl;
+    for(int i = 0;i < field.size();i++) {
+      for(int j = 0; j < field[0].size();j++) {
+        field[i][j] = fieldArray[i*width+j];
+      }
+    }
+    free(fieldArray);
+      //out << "temporary part freed" << std::endl;
   }
 
   void FieldManager::parseCSV(const std::string& fileName) {
