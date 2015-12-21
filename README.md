@@ -6,7 +6,7 @@
 - [x] single threaded (it was created for tests)
 - [x] using pthreads
 - [x] using MPI point to point operations
-- [ ] using MPI collective operations
+- [x] using MPI collective operations
 - [ ] using OpenMP
 
 ## Usage
