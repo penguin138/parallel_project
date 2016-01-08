@@ -14,12 +14,12 @@ class Thread {
   int numberOfThreads;
   Thread* leftThread; // adjacent
   Thread* rightThread; // threads;
-  sem_t* leftSemaphore; // tells adjacent threads,
-  sem_t* rightSemaphore; //that my borders are ready(or not);
-  sem_t* leftControlSemaphore; // checks, that previous reads of borders
-  sem_t* rightControlSemaphore; // finished successfully;
-  pthread_cond_t* stopped; //condition variable of master, tells thread when to work;
-  pthread_mutex_t* stopMutex; // mutex for condition variable;
+  //sem_t* leftSemaphore; // tells adjacent threads,
+  //sem_t* rightSemaphore; //that my borders are ready(or not);
+  //sem_t* leftControlSemaphore; // checks, that previous reads of borders
+  //sem_t* rightControlSemaphore; // finished successfully;
+  //pthread_cond_t* stopped; //condition variable of master, tells thread when to work;
+  //pthread_mutex_t* stopMutex; // mutex for condition variable;
   ll numberOfIterations;
   ll currentIteration;
   fieldType myPartWithBorders; // has size = chunkHeight + 2;
@@ -29,7 +29,7 @@ class Thread {
 public:
   //constructs a new thread wrapper object.
   Thread(int threadNumber, fieldType myInitialPart, fieldType initialBorders,
-    int numberOfIterations, pthread_cond_t* stopped, pthread_mutex_t* stopMutex,
+    int numberOfIterations, //pthread_cond_t* stopped, pthread_mutex_t* stopMutex,
     FieldManager& manager, int numberOfThreads);
 
   //copies references to adjacent threads,important for border exchange.
@@ -49,10 +49,11 @@ public:
 
   void updateIterations(ll numberOfIterations);
 
-private:
-  static void* runInThread(void* thisThread);
   //runs Game Of Life iterations.
   void run();
+private:
+  static void* runInThread(void* thisThread);
+
   //performs one iteration of Game of Life on provided part of field.
   void oneIteration();
 

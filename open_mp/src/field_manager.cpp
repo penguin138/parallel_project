@@ -7,11 +7,61 @@
 #include <pthread.h>
 #include "../common_lib/headers/exceptions.h"
 #include <omp.h>
+#include <cstdarg>
 
   FieldManager::FieldManager(std::ostream& out):out(out){
     threadsCreated = false;
+    newCommandArrived = false;
   }
-
+  void FieldManager::waitForIt() {
+    std::cout << "wait for it!" << std::endl;
+    while(true) {
+      //std::cout << newCommandArrived << std::endl;
+      if (newCommandArrived) {
+        newCommandArrived = false;
+        std::cout << "arrived" << std::endl;
+        if (command == "start") {
+            if (numberOfArgs == 2) {
+              start(stringArg, intArg);
+            } else {
+              start(longLongArg1,longLongArg2,intArg);
+            }
+            std::cout << "This will never be printed because of stupidity" << std::endl;
+        } else if (command == "run") {
+          run(longLongArg1);
+        } else if (command == "status") {
+          std::cout << "second status" << std::endl;
+          status();
+        } else if (command == "stop") {
+          stop();
+        } else if (command == "exit") {
+          exit(true);
+          break;
+        }
+      }
+    }
+  }
+  void FieldManager::newCommand(const std::string& newCommand,int count,...) {
+    command = newCommand;
+    numberOfArgs = count;
+    va_list args;
+    va_start(args, count);
+    if (command == "start") {
+      if (count == 3) {
+          longLongArg1 = va_arg(args, long long);
+          longLongArg2 = va_arg(args, long long);
+          intArg = va_arg(args, int);
+      } else {
+          stringArg = va_arg(args, std::string);
+          intArg = va_arg(args, int);
+      }
+    }  else if (command == "run") {
+      longLongArg1 = va_arg(args, long long);
+    }
+    va_end(args);
+    newCommandArrived = true;
+    std::cout << "set" << std::endl;
+  }
   void FieldManager::start(std::string fileName, int numberOfThreads) {
     currentIteration = 0;
     stopped = true;
@@ -21,8 +71,8 @@
     this->numberOfThreads = 1;
     this->numberOfThreads1 = numberOfThreads;
     parseCSV(fileName);
-    pthread_mutex_init(&stopMutex, NULL);
-    pthread_cond_init(&needToStop, NULL);
+    //pthread_mutex_init(&stopMutex, NULL);
+    //pthread_cond_init(&needToStop, NULL);
     if (threadsCreated) {
       destroyThreads(false);
     }
@@ -41,8 +91,8 @@
     this->numberOfThreads = 1;
     this->numberOfThreads1 = numberOfThreads;
     generateField(width, height);
-    pthread_mutex_init(&stopMutex, NULL);
-    pthread_cond_init(&needToStop, NULL);
+    //pthread_mutex_init(&stopMutex, NULL);
+    //pthread_cond_init(&needToStop, NULL);
     if (threadsCreated) {
       destroyThreads(false);
     }
@@ -55,6 +105,7 @@
   }
 
   void FieldManager::status() {
+    out << "1" << std::endl;
     if (running) {
       out << "still running, call stop" << std::endl;
       return;
@@ -75,14 +126,15 @@
     threads = (Thread*) malloc(numberOfThreads*sizeof(Thread));
     for (int i = 0; i < numberOfThreads; i++) {
       new (threads + i) Thread(i, getThreadPart(i), getThreadBorders(i),
-       0, &needToStop, &stopMutex, *this, numberOfThreads1);
+       0, //&needToStop, &stopMutex,
+       *this, numberOfThreads1);
     }
     for (int i = 0; i < numberOfThreads; i++) {
       threads[i].getAdjacentThreads(
         threads[(numberOfThreads + i - 1)%numberOfThreads], threads[(numberOfThreads + i + 1)%numberOfThreads]);
     }
     for (int i = 0; i < numberOfThreads; i++) {
-      threads[i].create();
+        threads[i].run();
     }
   }
   void FieldManager::destroyThreads(bool wait) {
@@ -93,18 +145,18 @@
       (threads + i)->~Thread();
     }
     free(threads);
-    pthread_cond_destroy(&needToStop);
-    pthread_mutex_destroy(&stopMutex);
+    //pthread_cond_destroy(&needToStop);
+    //pthread_mutex_destroy(&stopMutex);
   }
   void FieldManager::run(ll numberOfIterations) {
     for (int i = 0; i < numberOfThreads; i++) {
       threads[i].updateIterations(numberOfIterations);
     }
-    pthread_mutex_lock(&stopMutex);
+    //pthread_mutex_lock(&stopMutex);
     stopped = false;
     running = true;
-    pthread_cond_broadcast(&needToStop);
-    pthread_mutex_unlock(&stopMutex);
+    //pthread_cond_broadcast(&needToStop);
+    //pthread_mutex_unlock(&stopMutex);
   }
 
   fieldType FieldManager::getThreadPart(int threadNumber) {
@@ -168,11 +220,11 @@
       if (!threadsCreated) {
         return;
       }
-      pthread_mutex_lock(&stopMutex);
+      //pthread_mutex_lock(&stopMutex);
       stopped = false;
       running = true;
-      pthread_cond_broadcast(&needToStop);
-      pthread_mutex_unlock(&stopMutex);
+      //pthread_cond_broadcast(&needToStop);
+      //pthread_mutex_unlock(&stopMutex);
       destroyThreads(wait);
   }
   void FieldManager::parseCSV(const std::string& fileName) {

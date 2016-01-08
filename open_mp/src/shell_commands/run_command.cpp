@@ -12,7 +12,7 @@ public:
   virtual void run(std::string notParsedArgs) {
     std::vector<std::string> parsedArgs = parseArguments(notParsedArgs);
     if (checkNumberOfArguments(parsedArgs.size(), 1, out)) {
-      manager.run(atoi(parsedArgs[0].c_str()));
+        manager.newCommand(std::string("run"),1,atoi(parsedArgs[0].c_str()));
     }
   }
 };

@@ -7,15 +7,27 @@
 using namespace std;
 
 int main() {
-  map<string, ShellCommand*> commands;
-  FieldManager manager(std::cout);
-  commands.insert(pair<string, ShellCommand* > (string("start"), new StartCommand(cout, manager)));
-  commands.insert(pair<string, ShellCommand* > (string("quit"), new ExitCommand(cout, manager)));
-  commands.insert(pair<string, ShellCommand* > (string("run"), new RunCommand(cout, manager)));
-  commands.insert(pair<string, ShellCommand* > (string("status"), new StatusCommand(cout, manager)));
-  commands.insert(pair<string, ShellCommand* > (string("stop"), new StopCommand(cout, manager)));
-  Shell shell(commands, cout, cin);
-  shell.start();
+    map<string, ShellCommand*> commands;
+    FieldManager manager(std::cout);
+    commands.insert(pair<string, ShellCommand* > (string("start"), new StartCommand(cout, manager)));
+    commands.insert(pair<string, ShellCommand* > (string("quit"), new ExitCommand(cout, manager)));
+    commands.insert(pair<string, ShellCommand* > (string("run"), new RunCommand(cout, manager)));
+    commands.insert(pair<string, ShellCommand* > (string("status"), new StatusCommand(cout, manager)));
+    commands.insert(pair<string, ShellCommand* > (string("stop"), new StopCommand(cout, manager)));
+    Shell shell(commands, cout, cin);
+    #pragma omp parallel sections shared(manager)
+    {
+      #pragma omp section
+      {
+        cout << "thread " << omp_get_thread_num() << std::endl;
+        manager.waitForIt();
+      }
+      #pragma omp section
+      {
+        cout << "thread " << omp_get_thread_num() << std::endl;
+        shell.start();
+      }
+    }
   for(std::map<string, ShellCommand*>::iterator it = commands.begin();it != commands.end();it++) {
     delete(it->second);
   }

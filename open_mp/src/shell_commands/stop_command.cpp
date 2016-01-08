@@ -11,7 +11,7 @@ public:
   virtual void run(std::string notParsedArgs) {
     std::vector<std::string> parsedArgs = parseArguments(notParsedArgs);
     if (checkNumberOfArguments(parsedArgs.size(), 0, out)) {
-      manager.stop();
+      manager.newCommand("stop",0);
     }
   }
 };

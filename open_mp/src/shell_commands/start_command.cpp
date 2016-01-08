@@ -16,14 +16,14 @@ public:
     if (checkNumberOfArguments(argsSize, 2, 3, out)) {
       if (argsSize == 2) {
         try {
-          manager.start(parsedArgs[0], atoi(parsedArgs[1].c_str()));
+          manager.newCommand(std::string("start"),2,parsedArgs[0], atoi(parsedArgs[1].c_str()));
         } catch (fileNotFoundException e) {
           out << e.what() << std::endl;
         } catch (wrongFileFormatException e) {
           out << e.what() << std::endl;
         }
       } else {
-        manager.start(atol(parsedArgs[0].c_str()), atol(parsedArgs[1].c_str()), atoi(parsedArgs[2].c_str()));
+        manager.newCommand(std::string("start"),3,atol(parsedArgs[0].c_str()), atol(parsedArgs[1].c_str()), atoi(parsedArgs[2].c_str()));
       }
     }
   }

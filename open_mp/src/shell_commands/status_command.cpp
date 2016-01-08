@@ -12,7 +12,9 @@ public:
     out << "in status!\n";
     std::vector<std::string> parsedArgs = parseArguments(notParsedArgs);
     if (checkNumberOfArguments(parsedArgs.size(), 0, out)) {
-      manager.status();
+      out << "newCommand" << std::endl;
+      manager.newCommand("status",0);
+      out << "done" << std::endl;
     }
   }
 };

@@ -16,8 +16,16 @@ class FieldManager {
   bool stopped;
   bool running;
   bool threadsCreated;
-  pthread_cond_t needToStop;
-  pthread_mutex_t stopMutex;
+  volatile int numberOfArgs;
+  std::string command;
+  volatile ll longLongArg1;
+  volatile ll longLongArg2;
+  volatile int intArg;
+  std::string stringArg;
+  volatile bool newCommandArrived;
+
+  //pthread_cond_t needToStop;
+  //pthread_mutex_t stopMutex;
 public:
   //constructs file manager.
   FieldManager(std::ostream& out);
@@ -41,6 +49,10 @@ public:
   void quit(bool wait);
 
   bool wasStopped();
+
+  void waitForIt();
+
+  void newCommand(const std::string& newCommand,int count,...);
 private:
     //creates threads.
   void createThreads();
