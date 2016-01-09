@@ -7,7 +7,7 @@
 - [x] using pthreads
 - [x] using MPI point to point operations
 - [x] using MPI collective operations
-- [ ] using OpenMP
+- [x] using OpenMP
 
 ## Usage
 
