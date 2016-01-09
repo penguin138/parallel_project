@@ -9,12 +9,12 @@ public:
     ShellCommand::name = "status";
   }
   virtual void run(std::string notParsedArgs) {
-    out << "in status!\n";
+    //out << "in status!\n";
     std::vector<std::string> parsedArgs = parseArguments(notParsedArgs);
     if (checkNumberOfArguments(parsedArgs.size(), 0, out)) {
-      out << "newCommand" << std::endl;
+      //out << "newCommand" << std::endl;
       manager.newCommand("status",0);
-      out << "done" << std::endl;
+      //out << "done" << std::endl;
     }
   }
 };

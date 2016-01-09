@@ -86,26 +86,28 @@ void Thread::updateIterations(ll numberOfIterations) {
 }
 void Thread::run() {
   omp_set_num_threads(numberOfThreads);
-  while (!cancelled || waiting) {
+
+  //while (!cancelled || waiting) {
     //pthread_mutex_lock(stopMutex);
     //bool out = false;
-    while (manager.wasStopped()) {
+    //while (manager.wasStopped()) {
       /*if (!out) {
         std::cout << threadNumber << ": stopped" << std::endl;
         out = true;
       }*/
       //pthread_cond_wait(stopped, stopMutex);
-    }
+    //}
+
     //pthread_mutex_unlock(stopMutex);
-    if (currentIteration < numberOfIterations && (!cancelled || waiting)) {
-        //std::cout << threadNumber << ": current iteration is " << currentIteration << std::endl;
+    if (currentIteration < numberOfIterations && !cancelled && !manager.wasStopped()) {
+        //std::cout /*<< threadNumber */<< ": current iteration is " << currentIteration << std::endl;
         oneIteration();
         currentIteration++;
     }
-    if (currentIteration == numberOfIterations && cancelled) {
+    /*if (currentIteration == numberOfIterations && cancelled) {
       waiting = false;
     }
-  }
+  }*/
   //std::cout << threadNumber << " :cancelled" << std::endl;
 }
 void Thread::oneIteration() {
@@ -132,29 +134,31 @@ void Thread::oneIteration() {
 }
 
 void Thread::exchangeBorders() {
+  /*
   //let read my borders.
-  //std::cout << threadNumber << ": raising semaphores..." <<std::endl;
-  //sem_post(leftSemaphore);
-  //sem_post(rightSemaphore);
+  std::cout << threadNumber << ": raising semaphores..." <<std::endl;
+  sem_post(leftSemaphore);
+  sem_post(rightSemaphore);
 
-  //std::cout << threadNumber << ": waiting for left thread" << std::endl;
+  std::cout << threadNumber << ": waiting for left thread" << std::endl;
   //read adjacent borders.
-  //sem_wait(leftThread->rightSemaphore);
-  //myPartWithBorders[0] = leftThread->myPartWithBorders[leftThread->chunkHeight];
-  //std::cout << threadNumber << ": raising control semaphore of left thread" << std::endl;
-  //sem_post(leftThread->rightControlSemaphore);
+  sem_wait(leftThread->rightSemaphore);
+  myPartWithBorders[0] = leftThread->myPartWithBorders[leftThread->chunkHeight];
+  std::cout << threadNumber << ": raising control semaphore of left thread" << std::endl;
+  sem_post(leftThread->rightControlSemaphore);
 
-  //std::cout << threadNumber << ": waiting for right thread" << std::endl;
-  //sem_wait(rightThread->leftSemaphore);
-  //myPartWithBorders[chunkHeight + 1] = rightThread->myPartWithBorders[1];
-  //std::cout << threadNumber << ": raising control semaphore of right thread" << std::endl;
-  //sem_post(rightThread->leftControlSemaphore);
+  std::cout << threadNumber << ": waiting for right thread" << std::endl;
+  sem_wait(rightThread->leftSemaphore);
+  myPartWithBorders[chunkHeight + 1] = rightThread->myPartWithBorders[1];
+  std::cout << threadNumber << ": raising control semaphore of right thread" << std::endl;
+  sem_post(rightThread->leftControlSemaphore);
 
-  //std::cout << threadNumber << ": waiting for my control semaphores" << std::endl;
+  std::cout << threadNumber << ": waiting for my control semaphores" << std::endl;
   //check that my borders were read.
-  //sem_wait(rightControlSemaphore);
-  //sem_wait(leftControlSemaphore);
-  //std:: cout << threadNumber << ": exchanged" << std::endl;
+  sem_wait(rightControlSemaphore);
+  sem_wait(leftControlSemaphore);
+  std:: cout << threadNumber << ": exchanged" << std::endl;
+  */
 }
 
 int Thread::numberOfNeighbours(ll i, ll j) {

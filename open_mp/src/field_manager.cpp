@@ -14,23 +14,23 @@
     newCommandArrived = false;
   }
   void FieldManager::waitForIt() {
-    std::cout << "wait for it!" << std::endl;
+    //std::cout << "wait for it!" << std::endl;
     while(true) {
       //std::cout << newCommandArrived << std::endl;
       if (newCommandArrived) {
         newCommandArrived = false;
-        std::cout << "arrived" << std::endl;
+        //std::cout << "arrived" << std::endl;
         if (command == "start") {
             if (numberOfArgs == 2) {
               start(stringArg, intArg);
             } else {
               start(longLongArg1,longLongArg2,intArg);
             }
-            std::cout << "This will never be printed because of stupidity" << std::endl;
+            //std::cout << "This will never be printed because of my stupidity" << std::endl;
         } else if (command == "run") {
           run(longLongArg1);
         } else if (command == "status") {
-          std::cout << "second status" << std::endl;
+          //std::cout << "second status" << std::endl;
           status();
         } else if (command == "stop") {
           stop();
@@ -57,10 +57,18 @@
       }
     }  else if (command == "run") {
       longLongArg1 = va_arg(args, long long);
+    } else if (running) {
+        if (command == "stop"){
+          stop();
+        } else if (command == "exit") {
+          exit(true);
+        } else if (command == "status") {
+          status();
+        }
     }
     va_end(args);
     newCommandArrived = true;
-    std::cout << "set" << std::endl;
+    //std::cout << "set" << std::endl;
   }
   void FieldManager::start(std::string fileName, int numberOfThreads) {
     currentIteration = 0;
@@ -105,7 +113,7 @@
   }
 
   void FieldManager::status() {
-    out << "1" << std::endl;
+    //out << "1" << std::endl;
     if (running) {
       out << "still running, call stop" << std::endl;
       return;
@@ -133,9 +141,6 @@
       threads[i].getAdjacentThreads(
         threads[(numberOfThreads + i - 1)%numberOfThreads], threads[(numberOfThreads + i + 1)%numberOfThreads]);
     }
-    for (int i = 0; i < numberOfThreads; i++) {
-        threads[i].run();
-    }
   }
   void FieldManager::destroyThreads(bool wait) {
     for (int i = 0; i < numberOfThreads; i++) {
@@ -155,6 +160,9 @@
     //pthread_mutex_lock(&stopMutex);
     stopped = false;
     running = true;
+    for (int i = 0; i < numberOfThreads; i++) {
+        threads[i].run();
+    }
     //pthread_cond_broadcast(&needToStop);
     //pthread_mutex_unlock(&stopMutex);
   }

@@ -19,12 +19,12 @@ int main() {
     {
       #pragma omp section
       {
-        cout << "thread " << omp_get_thread_num() << std::endl;
+        //cout << "thread " << omp_get_thread_num() << std::endl;
         manager.waitForIt();
       }
       #pragma omp section
       {
-        cout << "thread " << omp_get_thread_num() << std::endl;
+        //cout << "thread " << omp_get_thread_num() << std::endl;
         shell.start();
       }
     }
