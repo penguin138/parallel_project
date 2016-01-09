@@ -28,6 +28,7 @@
             }
             //std::cout << "This will never be printed because of my stupidity" << std::endl;
         } else if (command == "run") {
+          std::cout << longLongArg1 << std::endl;
           run(longLongArg1);
         } else if (command == "status") {
           //std::cout << "second status" << std::endl;

@@ -99,7 +99,8 @@ void Thread::run() {
     //}
 
     //pthread_mutex_unlock(stopMutex);
-    if (currentIteration < numberOfIterations && !cancelled && !manager.wasStopped()) {
+
+    while(currentIteration < numberOfIterations && !cancelled && !manager.wasStopped()) {
         //std::cout /*<< threadNumber */<< ": current iteration is " << currentIteration << std::endl;
         oneIteration();
         currentIteration++;
@@ -125,9 +126,9 @@ void Thread::oneIteration() {
     }
   }
   myPartWithBorders = myNewPart;
-  ll size = myPartWithBorders.size() - 1;
-  std::vector<bool> tmp = myPartWithBorders[0];
-  myPartWithBorders[0] = myPartWithBorders[size - 1];
+  ll size = myPartWithBorders.size();
+  std::vector<bool> tmp = myPartWithBorders[1];
+  myPartWithBorders[0] = myPartWithBorders[size - 2];
   myPartWithBorders[size - 1] = tmp;
   //std::cout << threadNumber << ": computed my part" << std::endl;;
   //exchangeBorders();
